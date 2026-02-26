@@ -1,0 +1,226 @@
+[
+  {
+    "id": 1,
+    "image": "images/product1.jpg",
+    "name": "Гофрокороб 400×300×200",
+    "description": "Трёхслойный гофрокороб из картона марки Т-23. Подходит для упаковки и транспортировки товаров средних габаритов.",
+    "package": "Пачка 25 шт.",
+    "category": "Коробки и короба",
+    "hit": true,
+    "rrp": 75.0,
+    "prices": {
+      "upTo200": 45.0,
+      "from200": 40.0,
+      "from500": 35.0,
+      "container": 30.0
+    },
+    "economy": {
+      "from200": 11.1,
+      "from500": 22.2,
+      "container": 33.3
+    },
+    "margin": {
+      "upTo200": 40.0,
+      "from200": 46.7,
+      "from500": 53.3,
+      "container": 60.0
+    },
+    "bestPrice": 30.0
+  },
+  {
+    "id": 2,
+    "image": "images/product2.jpg",
+    "name": "Стрейч-плёнка 500мм×300м",
+    "description": "Прозрачная стрейч-плёнка для паллетной обмотки. Толщина 20 мкм. Высокая растяжимость.",
+    "package": "Рулон",
+    "category": "Плёнки и ленты",
+    "hit": false,
+    "rrp": 520.0,
+    "prices": {
+      "upTo200": 320.0,
+      "from200": 290.0,
+      "from500": 260.0,
+      "container": 220.0
+    },
+    "economy": {
+      "from200": 9.4,
+      "from500": 18.8,
+      "container": 31.2
+    },
+    "margin": {
+      "upTo200": 38.5,
+      "from200": 44.2,
+      "from500": 50.0,
+      "container": 57.7
+    },
+    "bestPrice": 220.0
+  },
+  {
+    "id": 3,
+    "image": "images/product3.jpg",
+    "name": "Скотч упаковочный 48мм×66м",
+    "description": "Прозрачный упаковочный скотч на акриловой основе. Высокая адгезия к картону.",
+    "package": "Блок 6 шт.",
+    "category": "Плёнки и ленты",
+    "hit": true,
+    "rrp": 290.0,
+    "prices": {
+      "upTo200": 180.0,
+      "from200": 165.0,
+      "from500": 150.0,
+      "container": 130.0
+    },
+    "economy": {
+      "from200": 8.3,
+      "from500": 16.7,
+      "container": 27.8
+    },
+    "margin": {
+      "upTo200": 37.9,
+      "from200": 43.1,
+      "from500": 48.3,
+      "container": 55.2
+    },
+    "bestPrice": 130.0
+  },
+  {
+    "id": 4,
+    "image": "images/product4.jpg",
+    "name": "Пузырчатая плёнка 1.2м×100м",
+    "description": "Двухслойная воздушно-пузырьковая плёнка для защиты хрупких товаров. Диаметр пузырька 10мм.",
+    "package": "Рулон",
+    "category": "Плёнки и ленты",
+    "hit": false,
+    "rrp": 2200.0,
+    "prices": {
+      "upTo200": 1450.0,
+      "from200": 1350.0,
+      "from500": 1200.0,
+      "container": 1050.0
+    },
+    "economy": {
+      "from200": 6.9,
+      "from500": 17.2,
+      "container": 27.6
+    },
+    "margin": {
+      "upTo200": 34.1,
+      "from200": 38.6,
+      "from500": 45.5,
+      "container": 52.3
+    },
+    "bestPrice": 1050.0
+  },
+  {
+    "id": 5,
+    "image": "images/product5.jpg",
+    "name": "Палетная лента ПП 15мм",
+    "description": "Полипропиленовая упаковочная лента для обвязки палет и тяжёлых грузов. Разрывная нагрузка 200 кг.",
+    "package": "Бухта 2000м",
+    "category": "Плёнки и ленты",
+    "hit": false,
+    "rrp": 3200.0,
+    "prices": {
+      "upTo200": 2100.0,
+      "from200": 1950.0,
+      "from500": 1800.0,
+      "container": 1600.0
+    },
+    "economy": {
+      "from200": 7.1,
+      "from500": 14.3,
+      "container": 23.8
+    },
+    "margin": {
+      "upTo200": 34.4,
+      "from200": 39.1,
+      "from500": 43.8,
+      "container": 50.0
+    },
+    "bestPrice": 1600.0
+  },
+  {
+    "id": 6,
+    "image": "images/product6.jpg",
+    "name": "Крафт-бумага 84см×100м",
+    "description": "Рулонная крафт-бумага плотностью 80 г/м². Используется для упаковки и защиты поверхностей.",
+    "package": "Рулон",
+    "category": "Бумага и картон",
+    "hit": true,
+    "rrp": 1500.0,
+    "prices": {
+      "upTo200": 950.0,
+      "from200": 880.0,
+      "from500": 800.0,
+      "container": 700.0
+    },
+    "economy": {
+      "from200": 7.4,
+      "from500": 15.8,
+      "container": 26.3
+    },
+    "margin": {
+      "upTo200": 36.7,
+      "from200": 41.3,
+      "from500": 46.7,
+      "container": 53.3
+    },
+    "bestPrice": 700.0
+  },
+  {
+    "id": 7,
+    "image": "images/product7.jpg",
+    "name": "Мешок полипропиленовый 55×95",
+    "description": "Белый полипропиленовый мешок для сыпучих материалов. Грузоподъёмность 50 кг.",
+    "package": "Пачка 100 шт.",
+    "category": "Мешки и пакеты",
+    "hit": false,
+    "rrp": 22.0,
+    "prices": {
+      "upTo200": 12.0,
+      "from200": 10.5,
+      "from500": 9.0,
+      "container": 7.5
+    },
+    "economy": {
+      "from200": 12.5,
+      "from500": 25.0,
+      "container": 37.5
+    },
+    "margin": {
+      "upTo200": 45.5,
+      "from200": 52.3,
+      "from500": 59.1,
+      "container": 65.9
+    },
+    "bestPrice": 7.5
+  },
+  {
+    "id": 8,
+    "image": "images/product8.jpg",
+    "name": "Zip-пакет 200×300мм",
+    "description": "Прозрачный пакет с замком zip-lock. Толщина 40 мкм. Многоразовое использование.",
+    "package": "Пачка 100 шт.",
+    "category": "Мешки и пакеты",
+    "hit": true,
+    "rrp": 550.0,
+    "prices": {
+      "upTo200": 350.0,
+      "from200": 320.0,
+      "from500": 290.0,
+      "container": 250.0
+    },
+    "economy": {
+      "from200": 8.6,
+      "from500": 17.1,
+      "container": 28.6
+    },
+    "margin": {
+      "upTo200": 36.4,
+      "from200": 41.8,
+      "from500": 47.3,
+      "container": 54.5
+    },
+    "bestPrice": 250.0
+  }
+]
