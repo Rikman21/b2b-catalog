@@ -14,8 +14,6 @@
   let categories = [];
   let deferredPrompt = null;
 
-  /* ── Helpers ── */
-
   function esc(str) {
     const el = document.createElement('span');
     el.textContent = str;
@@ -26,7 +24,7 @@
     return new Intl.NumberFormat('ru-RU', {
       style: 'currency',
       currency: 'RUB',
-      minimumFractionDigits: 2,
+      minimumFractionDigits: 0,
     }).format(price);
   }
 
@@ -39,8 +37,6 @@
     }
     return map;
   }
-
-  /* ── Price row builder ── */
 
   function priceRows(p) {
     const tiers = [
@@ -69,42 +65,81 @@
     }).join('');
   }
 
-  /* ── Card HTML ── */
+  function shortDesc(name) {
+    const parts = name.split(' ');
+    if (parts.length <= 3) return name;
+    return parts.slice(0, 3).join(' ') + '…';
+  }
 
   function cardHTML(p) {
     const badges = [];
     if (p.hit) badges.push('<span class="badge badge--hit">Хит продаж</span>');
 
+    const imgSrc = p.image || '';
+    const hasDesc = p.description && p.description.trim();
+
     return `
-      <article class="card">
-        <div class="card__img-wrap">
-          ${badges.length ? `<div class="card__badges">${badges.join('')}</div>` : ''}
-          <img
-            class="card__img"
-            src="${p.image}"
-            alt="${esc(p.name)}"
-            loading="lazy"
-            onerror="this.parentNode.innerHTML='<svg class=card__img-placeholder width=64 height=64 viewBox=&quot;0 0 24 24&quot; fill=none stroke=#ccc stroke-width=1.5><rect x=3 y=3 width=18 height=18 rx=2/><circle cx=8.5 cy=8.5 r=1.5/><path d=&quot;M21 15l-5-5L5 21&quot;/></svg>'"
-          >
-        </div>
-        <div class="card__body">
-          <h2 class="card__name">${esc(p.name)}</h2>
-          <p class="card__desc">${esc(p.description)}</p>
-          <div class="card__meta">
-            <span class="card__package">📦 ${esc(p.package)}</span>
-            ${p.rrp > 0 ? `<span class="card__rrp">РРЦ ${fmt(p.rrp)}</span>` : ''}
+      <article class="card" data-id="${p.id}">
+        <div class="card__preview" onclick="window.__toggleCard(this)">
+          <div class="card__thumb">
+            ${badges.length ? `<div class="card__badges">${badges.join('')}</div>` : ''}
+            ${imgSrc
+              ? `<img class="card__thumb-img" src="${imgSrc}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+              : ''}
+            <div class="card__thumb-placeholder" ${imgSrc ? 'style="display:none"' : ''}>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
           </div>
-          <table class="price-table">
-            <thead>
-              <tr><th>Объём</th><th>Цена</th><th>Экономия</th><th>Маржа</th></tr>
-            </thead>
-            <tbody>${priceRows(p)}</tbody>
-          </table>
+          <div class="card__info">
+            <h2 class="card__name">${esc(p.name)}</h2>
+            <p class="card__price-preview">${fmt(p.bestPrice)}</p>
+          </div>
+          <div class="card__chevron">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="card__details">
+          <div class="card__details-inner">
+            <div class="card__img-wrap">
+              ${imgSrc
+                ? `<img class="card__img" src="${imgSrc}" alt="${esc(p.name)}" loading="lazy" onerror="this.style.display='none'">`
+                : ''}
+            </div>
+            ${hasDesc ? `<div class="card__section">
+              <div class="card__section-title">Комплектация</div>
+              <p class="card__desc">${esc(p.description)}</p>
+            </div>` : ''}
+            ${p.package ? `<div class="card__meta">
+              <span class="card__package">📦 ${esc(p.package)}</span>
+            </div>` : ''}
+            ${p.rrp > 0 ? `<div class="card__meta"><span class="card__rrp">РРЦ ${fmt(p.rrp)}</span></div>` : ''}
+            <table class="price-table">
+              <thead>
+                <tr><th>Объём</th><th>Цена</th><th>Экономия</th><th>Маржа</th></tr>
+              </thead>
+              <tbody>${priceRows(p)}</tbody>
+            </table>
+          </div>
         </div>
       </article>`;
   }
 
-  /* ── Render ── */
+  window.__toggleCard = function(previewEl) {
+    const card = previewEl.closest('.card');
+    const wasOpen = card.classList.contains('card--open');
+
+    document.querySelectorAll('.card--open').forEach(c => {
+      if (c !== card) c.classList.remove('card--open');
+    });
+
+    card.classList.toggle('card--open', !wasOpen);
+
+    if (!wasOpen) {
+      setTimeout(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 50);
+    }
+  };
 
   function render(products) {
     if (!products.length) {
@@ -132,8 +167,6 @@
     catalogEl.innerHTML = html;
   }
 
-  /* ── Load Data ── */
-
   async function loadProducts() {
     try {
       const res = await fetch('products.json');
@@ -148,8 +181,6 @@
       catalogEl.innerHTML = '<p style="padding:20px;color:#999">Не удалось загрузить каталог.</p>';
     }
   }
-
-  /* ── Search & Filter ── */
 
   function applyFilters() {
     const q = searchInput.value.trim().toLowerCase();
