@@ -80,29 +80,7 @@ def csv_to_json():
 
 
 def generate_placeholders():
-    items = [
-        ('product1.jpg', 'Гофрокороб', '#8D6E63'),
-        ('product2.jpg', 'Стрейч-плёнка', '#78909C'),
-        ('product3.jpg', 'Скотч', '#FFA726'),
-        ('product4.jpg', 'Пузырчатая плёнка', '#66BB6A'),
-        ('product5.jpg', 'Палетная лента', '#42A5F5'),
-        ('product6.jpg', 'Крафт-бумага', '#A1887F'),
-        ('product7.jpg', 'Мешок ПП', '#EF5350'),
-        ('product8.jpg', 'Zip-пакет', '#AB47BC'),
-    ]
-
-    for filename, label, color in items:
-        svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300">
-  <rect width="400" height="300" fill="{color}"/>
-  <rect x="150" y="60" width="100" height="100" rx="16" fill="rgba(255,255,255,0.15)"/>
-  <text x="200" y="125" text-anchor="middle" font-size="48" fill="rgba(255,255,255,0.35)" font-family="Arial">&#128230;</text>
-  <text x="200" y="240" text-anchor="middle" font-size="22" font-weight="600" fill="#fff" font-family="Arial,sans-serif">{label}</text>
-</svg>'''
-        path = os.path.join(IMAGES_DIR, filename)
-        with open(path, 'w', encoding='utf-8') as f:
-            f.write(svg)
-
-    print(f'[Images] {len(items)} placeholder images generated.')
+    print('[Images] No placeholder images to generate.')
 
 
 def generate_icons():
