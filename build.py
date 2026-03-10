@@ -34,23 +34,33 @@ def csv_to_json():
         reader = csv.DictReader(f)
         products = []
         for i, row in enumerate(reader, 1):
-            p200 = float(row['price_200'].strip() or 0)
-            p200p = float(row['price_200_plus'].strip() or 0)
-            p500p = float(row['price_500_plus'].strip() or 0)
-            pcont = float(row['price_container'].strip() or 0)
-            rrp = float(row.get('rrp', '0').strip() or 0)
+            def safe(v):
+                return (v or '').strip()
+
+            def safe_float(v):
+                s = safe(v).split(';')[0].replace(',', '.')
+                try:
+                    return float(''.join(c for c in s if c.isdigit() or c == '.' or c == '-') or 0)
+                except ValueError:
+                    return 0.0
+
+            p200 = safe_float(row.get('price_200'))
+            p200p = safe_float(row.get('price_200_plus'))
+            p500p = safe_float(row.get('price_500_plus'))
+            pcont = safe_float(row.get('price_container'))
+            rrp = safe_float(row.get('rrp'))
 
             prices_list = [p200, p200p, p500p, pcont]
             min_price = min(prices_list)
 
             products.append({
                 'id': i,
-                'image': row['image'].strip(),
-                'name': row['name'].strip(),
-                'description': row['description'].strip(),
-                'package': row['package'].strip(),
-                'category': row.get('category', '').strip() or 'Без категории',
-                'hit': row.get('hit', '').strip().lower() == 'yes',
+                'image': safe(row.get('image')),
+                'name': safe(row.get('name')),
+                'description': safe(row.get('description')),
+                'package': safe(row.get('package')),
+                'category': safe(row.get('category')) or 'Без категории',
+                'hit': safe(row.get('hit')).lower() == 'yes',
                 'rrp': rrp,
                 'prices': {
                     'upTo200': p200,
