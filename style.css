@@ -471,6 +471,11 @@ body {
   color: var(--orange-600);
 }
 
+.price-table th:nth-child(2),
+.price-table th:nth-child(3) {
+  text-align: right;
+}
+
 .price-table .cell-economy {
   text-align: right;
   white-space: nowrap;
@@ -650,6 +655,11 @@ body {
   font-size: 9px;
   color: #888;
   border-top: 1px solid #eee;
+}
+
+.pdf-catalog .pdf-price-table th:nth-child(2),
+.pdf-catalog .pdf-price-table th:nth-child(3) {
+  text-align: right;
 }
 
 .pdf-catalog .pdf-price-table td {

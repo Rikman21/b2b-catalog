@@ -40,10 +40,10 @@
 
   function priceRows(p) {
     const tiers = [
-      { label: 'до 200 шт',  price: p.prices.upTo200, economy: null,                margin: p.margin.upTo200 },
-      { label: 'от 200 шт',  price: p.prices.from200, economy: p.economy.from200,   margin: p.margin.from200 },
-      { label: 'от 500 шт',  price: p.prices.from500, economy: p.economy.from500,   margin: p.margin.from500 },
-      { label: 'Контейнер',  price: p.prices.container, economy: p.economy.container, margin: p.margin.container },
+      { label: 'до 200 шт',  price: p.prices.upTo200, economy: null },
+      { label: 'от 200 шт',  price: p.prices.from200, economy: p.economy.from200 },
+      { label: 'от 500 шт',  price: p.prices.from500, economy: p.economy.from500 },
+      { label: 'Контейнер',  price: p.prices.container, economy: p.economy.container },
     ];
 
     return tiers.map(t => {
@@ -54,13 +54,11 @@
       const econTag = t.economy > 0
         ? `<span class="economy-tag">-${t.economy}%</span>`
         : '<span style="color:#bbb">—</span>';
-      const marginVal = t.margin > 0 ? `${t.margin}%` : '—';
 
       return `<tr${rowClass}>
         <td>${t.label}</td>
         <td class="${priceClass}">${fmt(t.price)}${bestTag}</td>
         <td class="cell-economy">${econTag}</td>
-        <td class="cell-margin">${marginVal}</td>
       </tr>`;
     }).join('');
   }
@@ -115,7 +113,7 @@
             ${p.rrp > 0 ? `<div class="card__meta"><span class="card__rrp">РРЦ ${fmt(p.rrp)}</span></div>` : ''}
             <table class="price-table">
               <thead>
-                <tr><th>Объём</th><th>Цена</th><th>Экономия</th><th>Маржа</th></tr>
+                <tr><th>Объём</th><th>Цена</th><th>Экономия</th></tr>
               </thead>
               <tbody>${priceRows(p)}</tbody>
             </table>
@@ -207,10 +205,10 @@
 
   function pdfPriceRows(p) {
     const tiers = [
-      { label: 'до 200 шт',  price: p.prices.upTo200, economy: '—',                        margin: p.margin.upTo200 },
-      { label: 'от 200 шт',  price: p.prices.from200, economy: p.economy.from200 + '%',    margin: p.margin.from200 },
-      { label: 'от 500 шт',  price: p.prices.from500, economy: p.economy.from500 + '%',    margin: p.margin.from500 },
-      { label: 'Контейнер',  price: p.prices.container, economy: p.economy.container + '%', margin: p.margin.container },
+      { label: 'до 200 шт',  price: p.prices.upTo200, economy: '—' },
+      { label: 'от 200 шт',  price: p.prices.from200, economy: p.economy.from200 + '%' },
+      { label: 'от 500 шт',  price: p.prices.from500, economy: p.economy.from500 + '%' },
+      { label: 'Контейнер',  price: p.prices.container, economy: p.economy.container + '%' },
     ];
 
     return tiers.map(t => {
@@ -218,13 +216,11 @@
       const rowCls = isBest ? ' class="pdf-best-row"' : '';
       const priceCls = isBest ? 'pdf-price-val pdf-price-best' : 'pdf-price-val';
       const econVal = t.economy === '—' ? '—' : `-${t.economy}`;
-      const marginVal = t.margin > 0 ? `${t.margin}%` : '—';
 
       return `<tr${rowCls}>
         <td>${t.label}</td>
         <td class="${priceCls}">${fmt(t.price)}${isBest ? ' ★' : ''}</td>
         <td class="pdf-econ">${econVal}</td>
-        <td class="pdf-margin">${marginVal}</td>
       </tr>`;
     }).join('');
   }
@@ -269,7 +265,7 @@
             </div>
           </div>
           <table class="pdf-price-table">
-            <tr><th>Объём</th><th>Цена</th><th>Экономия</th><th>Маржа</th></tr>
+            <tr><th>Объём</th><th>Цена</th><th>Экономия</th></tr>
             ${pdfPriceRows(p)}
           </table>
         `;
